@@ -11,7 +11,7 @@ public class MyC45 {
 
 	public static void main(String[] args) throws IOException {
 		// .csv data sets
-		String files[] = {"data_sets/tic_tac_toe.csv"};
+		String files[] = {"../../../../data_sets/student.csv"};
 		Scanner scan;
 		
 		// start loop for all files HERE
