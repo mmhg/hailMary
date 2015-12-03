@@ -1,46 +1,59 @@
-package myc45;
+import csv
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.lang.Math;
+class MyC45:
 
-public class MyC45 {
+	def csvParser(filename):
+    thisData = []
+    file = open(filename)
+    reader = csv.reader(file, delimiter=',', quotechar = '"')
+    counter = 0
+    for row in reader:
+        if counter > 0:
+            thisData.append(row)
+        else:
+            counter += 1
+    return thisData
 
-	public static void main(String[] args) throws IOException {
-		// .csv data sets
-		String files[] = {"../../../../data_sets/tic_tac_toe.csv"};
-		Scanner scan;
+	def main: # throws IOException
+		# .csv data sets
+		files[] = {"../../../../data_sets/tic_tac_toe.csv"}
+		   #Scanner scan;
+
+
+
+
+
+
+
+
 		
-		// start loop for all files HERE
+		# start loop for all files HERE
 		scan = new Scanner(new File(files[0]));
 		String headerLine = scan.nextLine();
 		String headers[]  = headerLine.split(",");
 		
-		// class index is assumed to be the last column
+		# class index is assumed to be the last column
 		int classIndex    = headers.length - 1;
 		int numAttributes = headers.length - 1;
 		
-		// store data set attributes
+		# store data set attributes
 		Attribute attributes[] = new Attribute[numAttributes];
 		for(int x = 0; x < numAttributes; x++) {
 			attributes[x] = new Attribute(headers[x]);
 		}
 		
-		// for storing classes and class count
+		# for storing classes and class count
 		List<String>  classes      = new ArrayList<String>();
 		List<Integer> classesCount = new ArrayList<Integer>();
 		
-		// store are values into respected attributes
-		// along with respected classes
+		# store are values into respected attributes
+		# along with respected classes
 		while(scan.hasNextLine()){
 			Val data = null;
 			String inLine = scan.nextLine();
 			String lineData[] = inLine.split(",");
 			
-			// insert class into classes List
+			# insert class into classes List
 			if(classes.isEmpty()){
 				classes.add(lineData[classIndex]);
 				classesCount.add(classes.indexOf(lineData[classIndex]), 1);
@@ -56,7 +69,7 @@ public class MyC45 {
 				}
 			}
 			
-			// insert data into attributes
+			# insert data into attributes
 			for(int x = 0; x < numAttributes; x++){
 				data = new Val(lineData[x], lineData[classIndex]);
 				attributes[x].insertVal(data);
@@ -66,9 +79,9 @@ public class MyC45 {
 		for(int i : classesCount){
 			totalNumClasses += i;
 		}
-		double IofD = calcIofD(classesCount); // Set information criteria
+		double IofD = calcIofD(classesCount); # Set information criteria
 		
-		// TESTING DATA 
+		# TESTING DATA 
 		Attribute age = new Attribute("age");
 		
 		Val inV = new Val("30","yes"); age.insertVal(inV);
